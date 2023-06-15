@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\pscproject\spring\spring-quiz"/>
 			<item value="C:\pscproject\spring\spring-project"/>
 		</list>
 		<list key="projectNameTemplate">
