@@ -1,0 +1,9 @@
+package com.example.springquiz.dao;
+
+import java.util.List;
+
+import com.example.springquiz.dto.Student;
+
+public interface StudentDao {
+	public List<Student> selectList();
+}
