@@ -6,18 +6,22 @@
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.console.ConsoleView"/>
 			<item value="org.eclipse.ui.navigator.ProjectExplorer"/>
 			<item value="org.eclipse.epp.mpc.ui.command.showMarketplaceWizard"/>
 		</list>
 		<list key="orderedProviders">
 			<item value="org.eclipse.e4.ui.parts"/>
+			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textEntries">
 			<item value="1"/>
+			<item value="1"/>
 			<item value="2"/>
 		</list>
 		<list key="textArray">
+			<item value="console"/>
 			<item value="proje"/>
 			<item value="marketplace"/>
 			<item value="market"/>
