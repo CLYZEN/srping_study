@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.company.dao.CompanyDao">
+	<select id="findCommon" parameterType="int" resultType="Emp">
+		select * from emp where empno = #{empno}
+	</select>
+	
+	<select id="findComeOut" parameterType="int" resultType="Commute">
+		select * from commute where empno = #{empno} and to_char(come,'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<insert id="checkIn" parameterType="int">
+		insert into commute (commuteno,empno,come) values(commuteseq.nextval,#{empno},sysdate)
+	</insert>
+	<update id="checkOut" parameterType="int">
+		UPDATE commute
+	SET out = SYSDATE
+	WHERE empno = ${empno}
+	AND commuteno = (
+    SELECT MAX(commuteno)
+    FROM commute
+    WHERE empno = ${empno}
+	)
+	</update>
+</mapper>

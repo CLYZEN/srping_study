@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+	<div layout:fragment="content" id="bbs">
+    <form action="common" method="post" name="myForm">		
+        <h1 style="text-align: center;">출퇴근 관리</h1>
+        <div class="input-group input-group-lg" style="padding-top:50px; width:500px; margin: 0 auto;" >
+            <span class="input-group-text" id="inputGroup-sizing-lg">사번 입력</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="empno">
+            <input type="button" value="확인" onclick="checkEmpno();"/>
+        </div>
+    </form>
+
+    <div th:if="${emp} != null" class="list-group" style="width:500px; margin: 0 auto; padding-top:50px">
+        <ul class="list-group custom-horizontal-list">
+            <li class="list-group-item">이름</li>
+            <li class="list-group-item" th:text="${emp.name}"></li>
+        </ul>
+        <ul class="list-group custom-horizontal-list">
+            <li class="list-group-item">입사일</li>
+            <li class="list-group-item" th:text="${emp.hiredate}"></li>
+        </ul>
+    </div>
+
+    <div th:if="${emp} == null" class="list-group" style="width:500px; margin: 0 auto; padding-top:50px">
+        <h5>존재하지 않는 사번입니다.</h5>
+    </div>
+    
+    <div style="text-align: center">
+        <form th:if="${emp} != null and ${commute} == null" action="checkIn" method="post">
+            <input type="hidden" th:value="${emp?.empno}" name="empno">
+            <button  type="submit" class="btn btn-primary">출근하기</button>
+        </form>
+        <form th:if="${commute} != null and ${commute?.out} == null" action="checkOut" method="post">
+            <input type="hidden" th:value="${emp?.empno}" name="empno">
+            출근시간 : <div th:text="${commute.come}"></div>
+            <button  type="submit" class="btn btn-danger">퇴근하기</button>
+        </form>
+        
+        <div th:if="${commute?.out} != null">
+            퇴근처리가 완료되었습니다. </br>
+            퇴근시간 : <div th:text="${commute?.out}"></div>
+        </div>
+    </div>
+</div>
+
+	<!-- javascript -->
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			function checkEmpno() {
+				var f = document.myForm;
+				var str = f.empno.value;
+				str = str.trim();
+				
+				if (!str) {
+					alert("사번을 입력하세요.");
+					f.empno.focus();
+					return;
+				}
+				
+				f.submit();
+			}
+		</script>
+	</th:block>
+
+</html>

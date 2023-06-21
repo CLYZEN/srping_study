@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+	<div layout:fragment="content" id="bbs">
+     <form action="common" method="post" name="myForm">		
+        <h1 style="text-align: center; margin-top:20px;">내 근태확인</h1>
+        <div class="input-group input-group-lg" style="padding-top:50px; width:500px; margin: 0 auto;" >
+            <span class="input-group-text" id="inputGroup-sizing-lg">사번 입력</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="empno">
+            <input type="button" value="확인" onclick="checkEmpno();"/>
+        </div>
+    </form>
+
+    <div class="list-group" id="result" style="display: none;">
+        <ul>
+            <li>
+                <span>이름</span>
+                <span id="name"></span>
+            </li>
+            <li>
+                <span>입사일</span>
+                <span id="hiredate"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script>
+        function checkEmpno() {
+            var empno = document.getElementById("empno").value;
+            empno = empno.trim();
+
+            if (!empno) {
+                alert("사번을 입력하세요.");
+                return;
+            }
+
+            // AJAX 요청을 통해 서버에서 사번에 대한 정보를 받아온 뒤, 결과를 출력
+            // 이 예시에서는 간략하게 진행하기 위해 정적인 데이터를 사용하였습니다.
+            var data = {
+                name: "John Doe",
+                hiredate: "2022-01-01"
+            };
+
+            document.getElementById("name").innerText = data.name;
+            document.getElementById("hiredate").innerText = data.hiredate;
+
+            // 결과 출력을 위해 해당 요소를 보이도록 설정
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</th:block>
+</html>
