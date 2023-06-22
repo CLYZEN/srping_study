@@ -1,9 +1,12 @@
 package com.example.company.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.company.dao.CompanyDao;
+import com.example.company.dto.CommonData;
 import com.example.company.dto.Commute;
 import com.example.company.dto.Emp;
 
@@ -34,6 +37,17 @@ public class CompanyServiceImpl implements CompanyService {
 	public void checkOut(int empno) {
 		companyMapper.checkOut(empno);
 		
+	}
+
+
+	@Override
+	public int getDataCount(int empno) {
+		return companyMapper.getDataCount(empno);
+	}
+
+	@Override
+	public List<CommonData> getCommonLists(int empno, int start, int end) {
+		return companyMapper.getCommonLists(empno, start, end);
 	}
 
 }

@@ -5,25 +5,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.company.dao.CompanyDao">
+	<!-- <resultMap id="testMap" type="UserVo"> <result column="empno" property="empno" 
+		jdbcType="NUMBER" javaType="int"/> <result column="name" property="name" 
+		jdbcType="NVARCHAR" javaType="String"/> <result column="come" property="come" 
+		jdbcType="DATE" javaType="String"/> <result column="out" property="out" jdbcType="DATE" 
+		javaType="String"/> </resultMap> -->
+
 	<select id="findCommon" parameterType="int" resultType="Emp">
-		select * from emp where empno = #{empno}
+		select *
+		from emp where empno = #{empno}
 	</select>
-	
-	<select id="findComeOut" parameterType="int" resultType="Commute">
-		select * from commute where empno = #{empno} and to_char(come,'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+
+	<select id="findComeOut" parameterType="int"
+		resultType="Commute">
+		select * from commute where empno = #{empno} and
+		to_char(come,'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
 	</select>
-	
+
 	<insert id="checkIn" parameterType="int">
-		insert into commute (commuteno,empno,come) values(commuteseq.nextval,#{empno},sysdate)
+		insert into commute
+		(commuteno,empno,come) values(commuteseq.nextval,#{empno},sysdate)
 	</insert>
+
 	<update id="checkOut" parameterType="int">
 		UPDATE commute
-	SET out = SYSDATE
-	WHERE empno = ${empno}
-	AND commuteno = (
-    SELECT MAX(commuteno)
-    FROM commute
-    WHERE empno = ${empno}
-	)
+		SET out = SYSDATE
+		WHERE empno = ${empno}
+		AND commuteno = (
+		SELECT MAX(commuteno)
+		FROM commute
+		WHERE empno = ${empno}
+		)
 	</update>
+
+	<select id="getCommonLists" parameterType="map"
+		resultType="CommonData">
+		select * from (
+		select rownum rnum, data.* from (
+		select e.empno, e.name, c.come, c.out
+		from emp e, commute c
+		where e.empno = c.empno and e.empno = #{empno}
+		order by c.come desc
+		) data
+		)
+		<![CDATA[	
+    where rnum >= #{start} and rnum <= #{end}
+    		]]>
+	</select>
+
+	<select id="getDataCount" parameterType="int" resultType="int">
+		select
+		nvl(count(*), 0)
+		from emp e, commute c
+		where e.empno = c.empno and e.empno = #{empno}
+	</select>
+
 </mapper>
