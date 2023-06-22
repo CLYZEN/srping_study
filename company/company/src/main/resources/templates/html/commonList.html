@@ -4,7 +4,7 @@
 	layout:decorate="~{layouts/layout}">
 
 <div layout:fragment="content" id="bbs">
-	<form action="commonList" method="post" name="myForm">
+	<form action="commonListView" method="post" name="myForm">
 		<h1 style="text-align: center; margin-top: 20px;">내 근태확인</h1>
 		<div class="input-group input-group-lg"
 			style="padding-top: 50px; width: 500px; margin: 0 auto;">
@@ -37,9 +37,9 @@
 				<th colspan="4" style="text-align: center;">사번을 입력하지 않으셨거나 잘못된
 					사번입니다.</th>
 			</tr>
- 			<tr th:each="dataCount:${dataCount}"> 
+ 			<!-- <tr th:each="dataCount:${dataCount}">  -->
 				<td colspan="5" id="footer"><a th:utext="${pageIndexList}"></a></td>
-			</tr>
+			<!-- </tr> -->
 		</tbody>
 	</table>
 </div>

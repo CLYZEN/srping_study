@@ -77,7 +77,7 @@ public class CompanyController {
 		return "html/commonList";
 	}
 	
-	@RequestMapping(value = "/commonList", method = RequestMethod.POST)
+	@RequestMapping(value = "/commonListView", method = {RequestMethod.GET,RequestMethod.POST})
 	public String commonList(HttpServletRequest request, Model model) {
 		String pageNum = request.getParameter("pageNum"); // 바뀌는 페이지 번호
 		int currentPage = 1; // 현재 페이지 번호 (default)
@@ -103,7 +103,7 @@ public class CompanyController {
 		
 		String param = "";
 
-		String listUrl = "/commonList?empno=" + empno;
+		String listUrl = "/commonListView?empno=" + empno;
 
 		// list?searchKey=name&searchValue=어피치
 		if (!param.equals("")) {
