@@ -50,4 +50,47 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getCommonLists(empno, start, end);
 	}
 
+	@Override
+	public void deleteCommute(int empno) {
+		companyMapper.deleteCommute(empno);
+	}
+
+	@Override
+	public void deleteEmp(int empno) {
+		companyMapper.deleteEmp(empno);
+	}
+
+	@Override
+	public void insertEmployee(String name) {
+		companyMapper.insertEmployee(name);
+		
+	}
+
+	@Override
+	public int getNowEmpno() {
+		return companyMapper.getNowEmpno();
+	}
+
+	@Override
+	public List<CommonData> getListForAdmin(int start, int end, String date) {
+		return companyMapper.getListForAdmin(start, end,date);
+	}
+
+	@Override
+	public int getDataCountForAdmin(String date) {
+		return companyMapper.getDataCountForAdmin(date);
+	}
+
+	@Override
+	public int getDataCountForFire() {
+		return companyMapper.getDataCountForFire();
+	}
+
+	@Override
+	public List<Emp> getListForFire(int start, int end) {
+		return companyMapper.getListForFire(start, end);
+	}
+
+
+
 }

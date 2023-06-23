@@ -41,12 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCommonLists" parameterType="map"
 		resultType="CommonData">
 		select * from (
-		select rownum rnum, data.* from (
-		select e.empno, e.name, c.come, c.out
-		from emp e, commute c
-		where e.empno = c.empno and e.empno = #{empno}
-		order by c.come desc
-		) data
+			select rownum rnum, data.* from (
+				select e.empno, e.name, c.come, c.out
+				from emp e, commute c
+				where e.empno = c.empno and e.empno = #{empno}
+				order by c.come desc
+			) data
 		)
 		<![CDATA[	
     where rnum >= #{start} and rnum <= #{end}
@@ -60,4 +60,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where e.empno = c.empno and e.empno = #{empno}
 	</select>
 
+
+	<delete id="deleteCommute" parameterType="int">
+		delete from commute where empno = #{empno}
+	</delete>
+	
+	<delete id="deleteEmp" parameterType="int">
+		delete from emp where empno = #{empno}
+	</delete>
+	
+	<insert id="insertEmployee" parameterType="String">
+		insert into emp values(EMP_SEQ.nextval, #{name}, sysdate, 'N')
+	</insert>
+	
+	<select id="getNowEmpno" resultType="int">
+		SELECT EMP_SEQ.CURRVAL 
+		FROM DUAL
+	</select>
+	
+	<select id="getListForAdmin" parameterType="map" resultType="CommonData">
+select * from (
+    select rownum rnum, data.* from (
+	        	select e.empno, e.name, c.come, c.out
+	        	from emp e, commute c
+	        	where e.empno = c.empno and to_char(c.come,'YYYY-MM-DD') = #{date}
+	        	order by c.come desc
+    		) data
+		)
+   	<![CDATA[	
+    where rnum >= #{start} and rnum <= #{end}
+    		]]>
+	</select>
+	
+	<select id="getDataCountForAdmin" parameterType="String" resultType="int">
+		select
+		nvl(count(*), 0)
+		from emp e, commute c
+		where e.empno = c.empno and to_char(c.come,'YYYY-MM-DD') = #{date}
+	</select>
+	
+	<select id="getDataCountForFire" resultType="int">
+				select
+		nvl(count(*), 0)
+		from emp
+	</select>
+	
+	<select id="getListForFire" parameterType="map" resultType="Emp">
+		select * from (
+    	select rownum rnum, data.* from (
+	        	select *
+	        	from emp 
+                order by empno desc
+    		) data
+		)
+		<![CDATA[
+    where rnum >= #{start} and rnum <= #{end}
+    ]]>
+	</select>
 </mapper>

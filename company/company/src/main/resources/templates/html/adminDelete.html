@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout2}">
+
+<div layout:fragment="content" id="bbs">
+	<h1 style="text-align: center; margin-bottom: 50px">해고하기</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">사번</th>
+				<th scope="col">이름</th>
+				<th scope="col">입사일</th>
+				<th scope="col">해고?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${lists} != null" th:each="emp:${lists}">
+				<th scope="row" th:text = "${emp.empno}">1</th>
+				<td th:text="${emp.name}">Mark</td>
+				<td th:text="${emp.hiredate}">Otto</td>
+				<td><a  th:href="|/fire?empno=@{${emp.empno}}|"><button type="button" class="btn btn-danger">짜르기</button></a></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+	<a th:utext="${pageIndexList}"></a>
+</div>
+<!-- javascript -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		console.log("살려주세요");
+		
+
+		var message2 = [[${message}]]; 
+		if (message2 != null) {
+			alert(message2);
+		}
+
+	</script>
+</th:block>
+
+</html>

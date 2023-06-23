@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/layout2}">
 
 	<div layout:fragment="content" id="bbs">
-	
+		<h1 style="text-align: center">사원 추가하기</h1>
+		<form action="addEmployee" name="myForm" method="post">
+			<div class="input-group mb-3" style="width:600px; margin: 0 auto" >
+ 				 <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+ 				 <input name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+		<button onclick="checkName();">생성</button>
+		</div>
+		</form>
+		
+		
+		<h2 style="text-align: center">생성한 사원</h2>
+		<ul class="list-group" style="width:600px; margin:0 auto;"  th:if="${emp} != null">
+			<li class="list-group-item">사번 : <span  th:text=${emp.empno}></span></li>
+			<li class="list-group-item">이름 : <span  th:text=${emp.name}></span></li>
+			<li class="list-group-item">입사일 : <span  th:text=${emp.hiredate}></span></li>
+		</ul>
+		
+		<ul class="list-group" style="width:600px; margin:0 auto;"  th:if="${emp} == null">
+			<li class="list-group-item">사원을 생성해주세요</li>
+
+		</ul>
 	</div>
 	<!-- javascript -->
 	<th:block layout:fragment="script">
 		<script th:inline="javascript">
-		
+		function checkName() {
+			var f = document.myForm;
+			var str = f.name.value;
+			str = str.trim();
+
+			if (!str) {
+				alert("이름을 입력하세요.");
+				f.name.focus();
+				return;
+			}
+
+			f.submit();
+		}
 		</script>
 	</th:block>
 

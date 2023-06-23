@@ -21,4 +21,20 @@ public interface CompanyDao {
 	public List<CommonData> getCommonLists(int empno, int start, int end); 
 	
 	public int getDataCount(int empno);
+	
+	public void deleteCommute(int empno);
+	
+	public void deleteEmp(int empno);
+	
+	public void insertEmployee(String name);
+	
+	public int getNowEmpno();
+	
+	public List<CommonData> getListForAdmin(int start, int end, String date);
+	
+	public int getDataCountForAdmin(String date);
+	
+	public int getDataCountForFire();
+	
+	public List<Emp> getListForFire(int start, int end);
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+	<div layout:fragment="content" id="bbs">
+    <form action="commonDrop" method="post" name="myForm">		
+        <h1 style="text-align: center;">퇴사하기</h1>
+        <div class="input-group input-group-lg" style="padding-top:50px; width:500px; margin: 0 auto;" >
+            <span class="input-group-text" id="inputGroup-sizing-lg">사번 입력</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="empno">
+            <input type="button" value="확인" onclick="checkEmpno();"/>
+        </div>
+    </form>
+    
+    <h1 style ="text-align: center"th:text="${message}"></h1>
+
+    
+</div>
+
+	<!-- javascript -->
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			function checkEmpno() {
+				var f = document.myForm;
+				var str = f.empno.value;
+				str = str.trim();
+				
+				if (!str) {
+					alert("사번을 입력하세요.");
+					f.empno.focus();
+					return;
+				}
+				
+				f.submit();
+			}
+		</script>
+	</th:block>
+
+</html>
