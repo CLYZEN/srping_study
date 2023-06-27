@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\pscproject\spring\sns"/>
 			<item value="C:\pscproject\spring\shopmax"/>
 			<item value="C:\pscproject\spring\myshop-main"/>
 			<item value="C:\pscproject\spring\company"/>
