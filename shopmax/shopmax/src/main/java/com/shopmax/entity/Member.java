@@ -50,7 +50,8 @@ public class Member {
 		member.setEmail(memberFromDto.getEmail());
 		member.setAddress(memberFromDto.getAddress());
 		member.setPassword(password);
-		member.setRole(Role.ADMIN);
+		// member.setRole(Role.ADMIN); // 관리자로 가입
+		member.setRole(Role.USER); // 일반 사용자
 				
 		return member;
 	}
