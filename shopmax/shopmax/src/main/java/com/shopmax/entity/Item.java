@@ -37,7 +37,7 @@ public class Item extends BaseEntity {
 	private Integer stockNumber; // 재고수량
 	
 	@Lob // String 인데 긴 글이 들어가야 할 때 (longtext)
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "longtext")
 	private String itemDetail; // 상품상세설명
 	
 	@Enumerated(EnumType.STRING) // DB에 enum의 값 자체를 저장
