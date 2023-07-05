@@ -1,17 +1,9 @@
 package com.sns.entity;
 
 import com.sns.converter.BooleanToYNConverter;
-import com.sns.id.MemberId;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.sns.id.MemberInterestsId;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,11 +15,14 @@ import lombok.ToString;
 @Table(name = "member_interests")
 public class MemberInterests extends BaseTimeEntity {
 
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id")
-	private Member member; // 회원식별자
-	
+	@EmbeddedId
+	private MemberInterestsId memberId;
+
+	@MapsId("memberId")
+	@ManyToOne
+	@JoinColumn(name = "member_id", insertable = false, updatable = false)
+	public Member member;
+
 	@Convert(converter = BooleanToYNConverter.class)
 	@Column(nullable = false)
 	private boolean develop; // 개발
@@ -47,5 +42,9 @@ public class MemberInterests extends BaseTimeEntity {
 	@Convert(converter = BooleanToYNConverter.class)
 	@Column(nullable = false)
 	private boolean food; // 음식
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 7e067f9231306e52db63786bfe35e0ca9900f777

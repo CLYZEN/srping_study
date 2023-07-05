@@ -2,19 +2,24 @@ package com.sns.id;
 
 import java.io.Serializable;
 
+import com.sns.entity.Member;
+import com.sns.entity.MemberInterests;
 import groovy.transform.EqualsAndHashCode;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
-public class MemberId implements Serializable {
-	
-	 private Long memberId;
-	 private Long interestId;
+@Embeddable
+public class MemberInterestsId implements Serializable{
+
+	private long memberId;
+
+	@Column(name = "member_id")
+	private Long id;
+
 }
